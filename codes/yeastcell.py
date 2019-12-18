@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Project      : ML_Project_2
-# @Author       : 
+# @Author       : Wei Jiang, Xiaoyu Lin, Yao Di
 # @File         : yeastcell.py
-# @Discription  :
+# @Discription  : This file contains the configuration for training, and some helper function to load image and mask,
+#               : as well as function for erosion and dilation.
+#               : You can change the 'size' variable in function erode(),to apply different kernel diameter for erosion.
 import skimage
 import os
 import sys
@@ -29,6 +31,8 @@ sys.path.append(ROOT_DIR)  # To find local version of the library
 from mrcnn.config import Config
 from mrcnn import utils
 
+SIZE = 3
+
 class YeastCellConfig(Config):
     """Configuration for training on the toy shapes dataset.
     Derives from the base Config class and overrides values specific
@@ -53,14 +57,10 @@ class YeastCellConfig(Config):
     # Use smaller anchors because our image and objects are small
     RPN_ANCHOR_SCALES = (8, 16, 32, 64, 128)  # anchor side in pixels
 
-    # Reduce training ROIs per image because the images are small and have
-    # few objects. Aim to allow ROI sampling to pick 33% positive ROIs.
-    # TRAIN_ROIS_PER_IMAGE = 32
-
-    # Use a small epoch since the data is simple
+    # Use a big epoch since the data is big
     STEPS_PER_EPOCH = 100
 
-    # use small validation steps since the epoch is small
+    # Set validation steps
     VALIDATION_STEPS = 20
 
 
@@ -74,18 +74,20 @@ class YeastCellDataset(utils.Dataset):
         # Add classes
         self.add_class("YeastCell", 1, "cell")
 
-        # Add images
+        # Get images names and path
         frames_ids = next(os.walk(dataset_dir))[2]
 
         for frames_id in frames_ids:
             frames_id = '.'.join(frames_id.split('.')[:-1])
             framesize = skimage.io.imread(os.path.join(dataset_dir, "{}.tif".format(frames_id))).shape[0]
 
+            # Remove some fault masks
             if frames_id == 'michael_1.2_im':
                 framesize -= 1
             if frames_id == 'michael_1.2.2_im':
                 framesize -= 2
 
+            # Add images
             for i in range(framesize):
                 self.add_image(
                     "YeastCell",
@@ -101,14 +103,16 @@ class YeastCellDataset(utils.Dataset):
 
         frame_number = self.image_info[image_id]['id'].split('*')[1]
         image = skimage.io.imread(self.image_info[image_id]['path'])[int(frame_number)]
-        image = image.astype('int16')###
+        image = image.astype('int16')
         image = image / image.max() * 255
+
         # # If grayscale. Convert to RGB for consistency.
         if image.ndim != 3:
             image = skimage.color.gray2rgb(image)
         # If has an alpha channel, remove it for consistency
         if image.shape[-1] == 4:
             image = image[..., :3]
+
         return image
 
     def load_mask(self, image_id):
@@ -122,18 +126,19 @@ class YeastCellDataset(utils.Dataset):
         # Get mask directory from image path
         mask_dir = os.path.join(os.path.dirname(os.path.dirname(info['path'])), "mask")
 
-        # # Read mask files from .tiff image
+        # Read mask files from .tif image
         mask = []
         name = info['id'].split('*')[0]
         name = name.replace('frames', 'mask')
         name = name.replace('im', 'mask')
         frame_number = info['id'].split('*')[1]
         m = skimage.io.imread(os.path.join(mask_dir, "{}.tif".format(name)))[int(frame_number)]
-        m = m.astype('int16')###
+        m = m.astype('int16')
         instance_number = m.max()
         if instance_number == 0:
             print("Frame " + name + ' ' + str(frame_number) + " have no cell!")
 
+        # Transform different valued mask to multi instance mask
         for i in range(1, instance_number+1):
             m_instance = np.where(m != i, 0, m)
             m_instance = m_instance.astype(np.bool)
@@ -152,7 +157,9 @@ class YeastCellDataset(utils.Dataset):
         else:
             super(self.__class__, self).image_reference(image_id)
 
+
 def erode(images, random_state, parents, hooks):
+    """Apply erosion to images"""
     # Taking a matrix of size 3 as the kernel
     size = 3
     kernel = np.ones((size, size), np.uint8)
@@ -162,14 +169,16 @@ def erode(images, random_state, parents, hooks):
             if (x-center)**2 + (y-center)**2 > radius**2:
                 kernel[x][y] = 0
 
+    # Erode
     img_erosion = []
     for image in images:
         img_erosion.append(cv2.erode(image, kernel, iterations=1))
 
     return img_erosion
 
-def dilate(image, size=5):
-    # Taking a matrix of size 3 as the kernel
+
+def dilate(image, size=3):
+    """Apply dilation to the image"""
     kernel = np.ones((size, size), np.uint8)
     center = radius = (size-1)/2
     for x in range(size):
@@ -177,6 +186,7 @@ def dilate(image, size=5):
             if (x-center)**2 + (y-center)**2 > radius**2:
                 kernel[x][y] = 0
 
+    #  Erode
     image = image.astype('int16')
     image = cv2.UMat(image)
     img_dilation = cv2.dilate(image, kernel, iterations=1)

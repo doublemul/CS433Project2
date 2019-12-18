@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Project      : ML_Project_2
-# @Author       : Xiaoyu Lin
+# @Author       : Wei Jiang, Xiaoyu Lin, Yao Di
 # @File         : detection.py
-# @Discription  :
+# @Discription  : Run this file can apply trained model on the test dataset in dateset/test/frame, and generate a mask
+#                 sequence for corresponding frames.
+#                 You can change the size of dilation by changing tha parameter in dilate() function. Please keep the
+#                 size of dilation the same as the size of erosion in yeastcell.py
 import skimage
 import os
 import sys
@@ -22,9 +25,10 @@ from mrcnn import visualize
 from mrcnn.model import log
 import yeastcell
 import tensorflow as tf
-from imgaug import augmenters as iaa
-import tifffile
 
+################################################
+# Root
+################################################
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../")
 # Import Mask RCNN
@@ -39,7 +43,6 @@ DETECTION_DIR = os.path.abspath("../dataset/test/frame")
 ################################################
 # Inference Configuration
 config = yeastcell.YeastCellConfig()
-# config.display()
 
 ################################################
 # Preferences
@@ -48,7 +51,7 @@ config = yeastcell.YeastCellConfig()
 # Useful if you're training a model on the same
 # machine, in which case use CPU and leave the
 # GPU for training.
-DEVICE = "/cpu:0"  # /cpu:0 or /gpu:0
+DEVICE = "/device:CPU:0"  # /device:CPU:0 or /device:GPU:0
 
 # Inspect the model in training or inference modes
 # values: 'inference' or 'training'
@@ -91,7 +94,7 @@ for image_id in image_ids:
     r = results[0]
     # Dilate the masks
     for i in range(r['masks'].shape[2]):
-        r['masks'][:, :, i] = yeastcell.dilate(r['masks'][:, :, i], size=5)
+        r['masks'][:, :, i] = yeastcell.dilate(r['masks'][:, :, i], size=3)
     # Visualize results
     visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'],
                                 class_names, r['scores'], show_bbox=False, show_label=False)
@@ -101,7 +104,7 @@ for image_id in image_ids:
         mask = mask + r['masks'][:, :, i] * (i + 1)
     final_mask.append(mask)
 
-# Generate result.tif file
+# Generate results.tif file
 final_mask = np.array(final_mask)
 final_mask = final_mask.astype('int16')
 skimage.external.tifffile.imsave('../dataset/test/mask/results.tif', final_mask, imagej=True)

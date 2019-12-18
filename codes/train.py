@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Project      : ML_Project_2
-# @Author       : Xiaoyu Lin
+# @Author       : Wei Jiang, Xiaoyu Lin, Yao Di
 # @File         : train.py
-# @Discription  :
+# @Discription  : Run this find can generate trained model using Mask-RCNN method.
 
 import skimage
 import os
@@ -32,15 +32,15 @@ from imgaug import augmenters as iaa
 # Useful if you're training a model on the same
 # machine, in which case use CPU and leave the
 # GPU for training.
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
-
 DEVICE = "/device:CPU:0"  # /device:CPU:0 or /device:GPU:0
 
+################################################
+# Roots
+################################################
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../")
-# Import Mask RCNN
-sys.path.append(ROOT_DIR)  # To find local version of the library
+# Find local version of the library
+sys.path.append(ROOT_DIR)
 # Directory to save logs and trained model
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 TRAIN_DIR = os.path.abspath("../dataset/train/frame")
@@ -85,18 +85,6 @@ print("Image Count: {}".format(len(dataset_val.image_ids)))
 print("Class Count: {}".format(dataset_val.num_classes))
 for i, info in enumerate(dataset_val.class_info):
     print("{:3}. {:50}".format(i, info['name']))
-
-# Load and display random samples
-# image_ids = np.random.choice(dataset_train.image_ids, 4)
-# image_ids = dataset_val.image_ids
-# for image_id in image_ids:
-#     print(image_id)
-#     image, image_meta, class_ids, bbox, mask = modellib.load_image_gt(
-#             dataset_val, config, image_id, use_mini_mask=False)
-#     # log("molded_image", image)
-#     # log("mask", mask)
-#     # visualize.display_instances(image, bbox, mask, class_ids, dataset_train.class_names,
-#     #                             show_bbox=False)
 
 ################################################
 # Create Model
