@@ -12,7 +12,7 @@ This is an implementation of Mask R-CNN method for yeast cell image segmentation
 - python 3.7, keras 2.2.0, tensorflow 1.13.1 
 - other common packages listed in requirements.txt
 
-## Folders and Files
+### Folders and Files
 - `codes`: contains python code developed for the project
   - `yeastSegHelpers`: contains helper file for segmentaion, tile and quality measurement
   - `train.py`: run this file to train the model
@@ -24,4 +24,11 @@ This is an implementation of Mask R-CNN method for yeast cell image segmentation
   - `test`: constains dataset for test, please place original frames in `frame` folder.
   - `train`: constains dataset for training, please place original frames in `frame` folder, and corresponding mask in `mask` folder
   - `validation`: constains dataset for validtion, please place original frames in `frame` folder, and corresponding mask in `mask` folder
-  -
+  - **Note:** for train and validation datasets, the name of original frames shoud contain 'im' or 'frames' ,and the corresponding mask shoul replace 'im' or 'frames' by 'mask' and keep the rest of name the same. For example: *augoustina_first_im.tif* and *augoustina_first_mask.tif*.
+  
+## Getting Started
+
+- Place datasets in the corresponding folders
+- Run `train.py` train the model according to given dataset
+- Run `detection.py` apply trained model on test dataset 
+- Run `evaluation.py` get quality measurements of trained model.
