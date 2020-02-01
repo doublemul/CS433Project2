@@ -27,7 +27,7 @@ This is an implementation of Mask-RCNN method for yeast cell image segmentation.
   - `validation`: constains dataset for validtion, please place original frames in `frame` folder, and corresponding mask in `mask` folder
   - **Note:** for train and validation datasets, the name of original frames shoud contain 'im' or 'frames' ,and the corresponding mask shoul replace 'im' or 'frames' by 'mask' and keep the rest of name the same. For example: *augoustina_first_im.tif* and *augoustina_first_mask.tif*.
   
-## Getting Started
+## Getting Start
 
 - Place datasets in the corresponding folders
 - Run `train.py` train the model according to given dataset
