@@ -2,7 +2,7 @@
 **EPFL | [Machine Learning (CS-433)](https://www.epfl.ch/labs/mlo/machine-learning-cs-433/) | Fall 2019 | Project 2**
 
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
-![tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-yellow.svg?style=plastic)
+![tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-orange.svg?style=plastic)
 
 - **Team name**: DayDreamers_WXY
 - **Team members**: Wei Jiang: wei.jiang@epfl.ch; Xiaoyu Lin: xiaoyu.lin@epfl.ch; Yao Di: yao.di@epfl.ch
