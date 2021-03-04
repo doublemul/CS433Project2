@@ -14,7 +14,7 @@
 - [[report](report.pdf)]
 
 ## Methond Description
-This is an implementation of Mask-RCNN method for yeast cell image segmentation. The model generates segmentation masks for each instance of yeast cell in the image. The source of this implementation is given by: https://github.com/matterport/Mask_RCNN.
+This is an implementation of Mask-RCNN method for yeast cell image segmentation. The model generates segmentation masks for each instance of yeast cell in the image. The source of this implementation is based on [Mask-RCNN](https://github.com/matterport/Mask_RCNN).
 
 ## Instruction
 ### Requirements
