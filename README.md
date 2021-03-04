@@ -3,7 +3,7 @@
 
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-yellow.svg?style=plastic)
-![keras 2.2.0](https://img.shields.io/badge/keras-2.2.0.svg?style=plastic)
+![keras 2.2.0](https://img.shields.io/badge/keras-2.2.0-red.svg?style=plastic)
 
 - **Team name**: DayDreamers_WXY
 - **Team members**: Wei Jiang: wei.jiang@epfl.ch; Xiaoyu Lin: xiaoyu.lin@epfl.ch; Yao Di: yao.di@epfl.ch
