@@ -1,6 +1,6 @@
 # Image Segmentaion for yeast cells using Mask-RCNN
 **EPFL | [Machine Learning (CS-433)](https://www.epfl.ch/labs/mlo/machine-learning-cs-433/) | Fall 2019 | Project 2**  
-**EPFL | [Laboratory of the Physics of Biological SystemsLaboratory of the Physics of Biological Systems](https://www.epfl.ch/labs/lpbs/)**
+**EPFL | [Laboratory of the Physics of Biological Systems](https://www.epfl.ch/labs/lpbs/)**
 
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-yellow.svg?style=plastic)
