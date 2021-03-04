@@ -3,8 +3,8 @@
 **EPFL | [Laboratory of the Physics of Biological Systems](https://www.epfl.ch/labs/lpbs/)**
 
 ![Python 3.7](https://img.shields.io/badge/python-3.7-blue.svg)
-![tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-yellow.svg)
-![keras 2.2.0](https://img.shields.io/badge/keras-2.2.0-red.svg)
+![Tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-yellow.svg)
+![Keras 2.2.0](https://img.shields.io/badge/keras-2.2.0-red.svg)
 
 ## About
 - This is our implementation of Mask-RCNN for yeast cells image segmentation. This is part of the second course project in the Machine Learning course at EPFL. The whole project is an interdisciplinary ‘Machine Learning for Science’ projects, where we cooperate with researchers at Laboratory of the Physics of Biological Systems to help them segment yeast cell bodies in microscope images using a hand-annotated image set through some machine leaning techniques.
