@@ -1,4 +1,6 @@
 # Image Segmentaion for yeast cells using Mask-RCNN
+**EPFL | Machine Learning (CS-433) | Fall 2019 | Project 2**  
+
 * Team name: **DayDreamers_WXY**
 - Wei Jiang: wei.jiang@epfl.ch
 - Xiaoyu Lin: xiaoyu.lin@epfl.ch
