@@ -1,4 +1,4 @@
-# Image Segmentaion for yeast cells using Mask-RCNN
+# Image segmentaion for yeast cells using Mask-RCNN
 **EPFL | [Machine Learning (CS-433)](https://www.epfl.ch/labs/mlo/machine-learning-cs-433/) | Fall 2019 | Project 2**  
 **EPFL | [Laboratory of the Physics of Biological Systems](https://www.epfl.ch/labs/lpbs/) | ‘Machine Learning for Science’ project**
 
@@ -34,11 +34,11 @@ This is an implementation of Mask-RCNN method for yeast cell image segmentation.
   - `test`: constains dataset for test, please place original frames in `frame` folder.
   - `train`: constains dataset for training, please place original frames in `frame` folder, and corresponding mask in `mask` folder
   - `validation`: constains dataset for validtion, please place original frames in `frame` folder, and corresponding mask in `mask` folder
-  - **Note:** for train and validation datasets, the name of original frames shoud contain 'im' or 'frames' ,and the corresponding mask shoul replace 'im' or 'frames' by 'mask' and keep the rest of name the same. For example: *augoustina_first_im.tif* and *augoustina_first_mask.tif*.
+  - **Note**: For training and validation datasets, the name of original frames shoud contain 'im' or 'frames' ,and the corresponding mask shoul replace 'im' or 'frames' by 'mask' and keep the rest of name the same. For example: *augoustina_first_im.tif* and *augoustina_first_mask.tif*.
   
 ## Getting Start
 
-- Place datasets in the corresponding folders
-- Run `train.py` train the model according to given dataset
-- Run `detection.py` apply trained model on test dataset 
+- Place datasets in the corresponding folders;
+- Run `train.py` train the model according to given dataset;
+- Run `detection.py` apply trained model on test dataset;
 - Run `evaluation.py` get quality measurements of trained model.
