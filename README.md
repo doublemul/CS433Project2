@@ -1,12 +1,15 @@
 # Image Segmentaion for yeast cells using Mask-RCNN
 **EPFL | [Machine Learning (CS-433)](https://www.epfl.ch/labs/mlo/machine-learning-cs-433/) | Fall 2019 | Project 2**
-
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
 ![tensorflow 1.13.1](https://img.shields.io/badge/tensorflow-1.13.1-yellow.svg?style=plastic)
 ![keras 2.2.0](https://img.shields.io/badge/keras-2.2.0-red.svg?style=plastic)
 
-- **Team name**: DayDreamers_WXY
-- **Team members**: Wei Jiang: wei.jiang@epfl.ch; Xiaoyu Lin: xiaoyu.lin@epfl.ch; Yao Di: yao.di@epfl.ch
+## About
+- This is our implementation for the one of the methods utilized for yeast cells image segmentation. This is part of the second course project in the Machine Learning course at EPFL. The whole project is an interdisciplinary ‘Machine Learning for Science’ projects, and we cooperate with researchers at Labor atory of the Physics of Biological Systems, EPFL to help them segment yeast cell bodies in microscope images using a hand-annotated image set through some machine leaning techniques.
+  - Team name: DayDreamers_WXY
+  - **Team members**: Wei Jiang: wei.jiang@epfl.ch; Xiaoyu Lin: xiaoyu.lin@epfl.ch; Yao Di: yao.di@epfl.ch
+- Other methods: we also utilize U-Net for the same task, the code is provided [here](https://github.com/Jiang15/Machine-Learning-Project).
+- [[report](report.pdf)]
 
 ## Methond Description
 This is an implementation of Mask-RCNN method for yeast cell image segmentation. The model generates segmentation masks for each instance of yeast cell in the image. The source of this implementation is given by: https://github.com/matterport/Mask_RCNN.
